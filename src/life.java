@@ -8,13 +8,19 @@ public class life {
 		Scanner keyin = new Scanner(System.in);
 
 		//Get x value
-		getval(x, "width", keyin);
+		x = getval(x, "width", keyin);
 
 		//Get y val
-		getval(y, "height", keyin);
+		y = getval(y, "height", keyin);
+
+		//edges get cut off
+		x += 2;
+		y += 2;
 
 		boolean field[][] = new boolean[x][y];
+		initializeArea(field, x, y);
 
+		printBoard(field, x, y);
 
 	}
 
@@ -53,6 +59,20 @@ public class life {
 			}
 		}
 		return true;
+	}
+
+	private static void printBoard(boolean[][] f, int x, int y){
+		for (int ii = 1; ii < x - 1; ii++){
+			for (int jj = 1; jj < y - 1; jj++){
+				if(f[ii][jj]) {
+					System.out.print("x");
+				}
+				else {
+					System.out.print(" ");
+				}
+			}
+			System.out.println();
+		}
 	}
 }
 
