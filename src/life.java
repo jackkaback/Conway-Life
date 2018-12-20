@@ -29,11 +29,21 @@ public class life {
 		//getData(field, x, y, keyin);
 
 		while(true) {
+			System.out.println("Input cell placement? (y/n): ");
+			String input = keyin.nextLine();
+			input.toLowerCase();
+
+			if(input.contains("y")) {
+				System.out.println();
+				//placeCells(field, x, y, keyin);
+			}
+
+			//update and print board
 			updateBoard(field, x, y);
 			printBoard(field, x, y);
 			System.out.println("------------------------------------------------------");
-			String input = keyin.nextLine();
-			//placeCells(field, x, y, keyin);
+
+			//remove soon
 			sleep(4000);
 		}
 	}
@@ -43,11 +53,14 @@ public class life {
 		String input = keyin.nextLine();
 	}
 
+	//gets the value for the X or Y lengths for the array
 	private static int getval(int val, String name, Scanner keyin){
 
 		while(true) {
+
 			System.out.print("Enter the " + name +" of the area: ");
 			String temp = keyin.nextLine();
+
 			if (isNumeric(temp)) {
 				val = Integer.parseInt(temp);
 				break;
@@ -59,8 +72,10 @@ public class life {
 
 	private static void initializeArea(boolean[][] f, int x, int y){
 		Random rand = new Random();
+
 		for(int ii = 0; ii < x; ii++){
 			for(int jj = 0; jj < y; jj++){
+
 				f[ii][jj] = rand.nextBoolean();
 //				if(ii == 0 || ii == x-1 || jj == 0 || jj == y-1){
 //					f[ii][jj] = true;
@@ -85,6 +100,7 @@ public class life {
 		return true;
 	}
 
+	//prints the board to the terminal
 	private static void printBoard(boolean[][] f, int x, int y){
 		for (int ii = 1; ii < x - 1; ii++){
 			for (int jj = 1; jj < y - 1; jj++){
@@ -99,43 +115,29 @@ public class life {
 		}
 	}
 
+	//determines what cells are alive or dead after every generation
 	private static void updateBoard(boolean[][] f, int x, int y){
 		boolean temp[][] = f;
 
 		for (int ii = 1; ii < x - 1; ii++){
 			for (int jj = 1; jj < y - 1; jj++){
+				
+				//counting cells around this cell that are alive
 				int count = 0;
-
-				//above
-				if(temp[ii-1][jj-1]){
-					count++;
+				
+				//counting around the cell
+				for(int a = -1; a <= 1; a++){
+					for(int b = -1; b <= 1; b++){
+						if(a == 0 && b == 0){
+							continue;
+						}
+						
+						if(temp[ii+1][jj+b]){
+							count++;
+						}
+					}
 				}
-				if(temp[ii][jj-1]){
-					count++;
-				}
-				if(temp[ii+1][jj-1]){
-					count++;
-				}
-
-				//sides
-				if(temp[ii-1][jj]){
-					count++;
-				}if(f[ii+1][jj]){
-					count++;
-				}
-
-				//below
-				if(temp[ii-1][jj+1]){
-					count++;
-				}
-				if(temp[ii][jj+1]){
-					count++;
-				}
-				if(temp[ii+1][jj+1]){
-					count++;
-				}
-
-
+				
 				//updating
 				if(temp[ii][jj] && (count < 2 || count > 3)){
 					f[ii][jj] = false;
