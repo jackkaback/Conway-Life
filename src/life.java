@@ -1,17 +1,21 @@
 import java.util.Scanner;
+import java.util.Random;
+
+import static java.lang.Thread.*;
+
 
 public class life {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		int x = 3;
 		int y = 3;
 		Scanner keyin = new Scanner(System.in);
 
 		//Get x value
-		x = getval(x, "width", keyin);
+		x = getval(x, "height", keyin);
 
 		//Get y val
-		y = getval(y, "height", keyin);
+		y = getval(y, "width", keyin);
 
 		//edges get cut off
 		x += 2;
@@ -22,15 +26,27 @@ public class life {
 
 		printBoard(field, x, y);
 		System.out.println("------------------------------------------------------");
-		updateBoard(field, x, y);
-		printBoard(field, x, y);
+		//getData(field, x, y, keyin);
 
+		while(true) {
+			updateBoard(field, x, y);
+			printBoard(field, x, y);
+			System.out.println("------------------------------------------------------");
+			String input = keyin.nextLine();
+			//placeCells(field, x, y, keyin);
+			sleep(4000);
+		}
+	}
+
+	//TODO add this feature in
+	private static void placeCells(boolean[][] f, int x, int y, Scanner keyin){
+		String input = keyin.nextLine();
 	}
 
 	private static int getval(int val, String name, Scanner keyin){
 
 		while(true) {
-			System.out.print("Enter the " + name +" of the area");
+			System.out.print("Enter the " + name +" of the area: ");
 			String temp = keyin.nextLine();
 			if (isNumeric(temp)) {
 				val = Integer.parseInt(temp);
@@ -42,9 +58,16 @@ public class life {
 	}
 
 	private static void initializeArea(boolean[][] f, int x, int y){
+		Random rand = new Random();
 		for(int ii = 0; ii < x; ii++){
 			for(int jj = 0; jj < y; jj++){
-				f[ii][jj] = true;
+				f[ii][jj] = rand.nextBoolean();
+//				if(ii == 0 || ii == x-1 || jj == 0 || jj == y-1){
+//					f[ii][jj] = true;
+//				}
+//				else{
+//					f[ii][jj] = false;
+//				}
 			}
 		}
 	}
