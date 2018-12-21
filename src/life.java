@@ -12,10 +12,10 @@ public class life {
 		Scanner keyin = new Scanner(System.in);
 
 		//Get x value
-		x = getval(x, "height", keyin);
+		x = getval("height", keyin);
 
 		//Get y val
-		y = getval(y, "width", keyin);
+		y = getval("width", keyin);
 
 		//edges get cut off
 		x += 2;
@@ -54,7 +54,7 @@ public class life {
 	}
 
 	//gets the value for the X or Y lengths for the array
-	private static int getval(int val, String name, Scanner keyin){
+	private static int getval(String name, Scanner keyin){
 
 		while(true) {
 
@@ -62,12 +62,9 @@ public class life {
 			String temp = keyin.nextLine();
 
 			if (isNumeric(temp)) {
-				val = Integer.parseInt(temp);
-				break;
+				return Integer.parseInt(temp);
 			}
 		}
-
-		return val;
 	}
 
 	private static void initializeArea(boolean[][] f, int x, int y){
