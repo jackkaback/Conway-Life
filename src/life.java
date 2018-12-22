@@ -1,21 +1,16 @@
 import java.util.Scanner;
 import java.util.Random;
 
-import static java.lang.Thread.*;
-
-
 public class life {
 
-	public static void main(String[] args) throws InterruptedException {
-		int x = 3;
-		int y = 3;
+	public static void main(String[] args) {
 		Scanner keyin = new Scanner(System.in);
 
 		//Get x value
-		x = getval("height", keyin);
+		int x = getval("height", keyin);
 
 		//Get y val
-		y = getval("width", keyin);
+		int y = getval("width", keyin);
 
 		//edges get cut off
 		x += 2;
@@ -42,16 +37,15 @@ public class life {
 			updateBoard(field, x, y);
 			printBoard(field, x, y);
 			System.out.println("------------------------------------------------------");
-
-			//remove soon
-			sleep(4000);
 		}
 	}
+
 
 	//TODO add this feature in
 	private static void placeCells(boolean[][] f, int x, int y, Scanner keyin){
 		String input = keyin.nextLine();
 	}
+
 
 	//gets the value for the X or Y lengths for the array
 	private static int getval(String name, Scanner keyin){
@@ -67,6 +61,7 @@ public class life {
 		}
 	}
 
+	//sets the board up
 	private static void initializeArea(boolean[][] f, int x, int y){
 		Random rand = new Random();
 
@@ -84,6 +79,7 @@ public class life {
 		}
 	}
 
+	//checks if a string is a number
 	private static boolean isNumeric(String checkString) {
 		if (checkString == null) {
 			return false;
@@ -129,7 +125,7 @@ public class life {
 							continue;
 						}
 						
-						if(temp[ii+1][jj+b]){
+						if(temp[ii+a][jj+b]){
 							count++;
 						}
 					}
