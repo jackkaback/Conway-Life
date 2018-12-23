@@ -40,12 +40,12 @@ public class life {
 		}
 	}
 
+	private static int[] getDots(Scanner keyin){
+		int [] retVal = {0,0};
 
-	//TODO add this feature in
-	private static void placeCells(boolean[][] f, int x, int y, Scanner keyin){
-		String input = keyin.nextLine();
+
+		return retVal;
 	}
-
 
 	//gets the value for the X or Y lengths for the array
 	private static int getval(String name, Scanner keyin){
@@ -62,14 +62,14 @@ public class life {
 	}
 
 	//sets the board up
-	private static void initializeArea(boolean[][] f, int x, int y){
+	private static void initializeArea(boolean[][] f, int xVal, int yVal){
 		Random rand = new Random();
 
-		for(int ii = 0; ii < x; ii++){
-			for(int jj = 0; jj < y; jj++){
+		for(int ii = 0; ii < xVal; ii++){
+			for(int jj = 0; jj < yVal; jj++){
 
 				f[ii][jj] = rand.nextBoolean();
-//				if(ii == 0 || ii == x-1 || jj == 0 || jj == y-1){
+//				if(ii == 0 || ii == xVal-1 || jj == 0 || jj == yVal-1){
 //					f[ii][jj] = true;
 //				}
 //				else{
@@ -91,6 +91,30 @@ public class life {
 			}
 		}
 		return true;
+	}
+
+	//TODO add this feature in
+	private static void placeCells(boolean[][] f, int x, int y, Scanner keyin){
+
+		while(true){
+			System.out.print("(D)ot, (L)ine, (F)ill, (P)rint field, (E)xit");
+			String input = keyin.nextLine();
+			input.toLowerCase();
+
+			if(input.contains("e")){
+				break;
+			}
+
+			else if(input.contains("p")){
+				printBoard(f, x, y);
+			}
+
+			else if(input.contains("d")){
+				int [] temp = getDots(keyin);
+				f[temp[0]][temp[1]] = !f[temp[0]][temp[1]];
+			}
+
+		}
 	}
 
 	//prints the board to the terminal
