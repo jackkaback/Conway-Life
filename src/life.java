@@ -42,24 +42,22 @@ public class life {
 	//
 	private static int[] getDots(Scanner keyin){
 		int [] retVal = {0,0};
-		String temp;
 
+		for (int ii = 0; ii < 2; ii++) {
 
-		while(true){
-			System.out.print("\nX value: ");
-			temp = keyin.nextLine();
-			if(isNumeric(temp)){
-				retVal[0] = Integer.parseInt(temp);
-				break;
-			}
-		}
+			while (true) {
 
-		while(true){
-			System.out.print("\ny value: ");
-			temp = keyin.nextLine();
-			if(isNumeric(temp)){
-				retVal[1] = Integer.parseInt(temp);
-				break;
+				if(ii == 0) {
+					System.out.print("\nX value: ");
+				}else{
+					System.out.print("\nY value: ");
+				}
+
+				String temp = keyin.nextLine();
+				if (isNumeric(temp)) {
+					retVal[ii] = Integer.parseInt(temp);
+					break;
+				}
 			}
 		}
 
