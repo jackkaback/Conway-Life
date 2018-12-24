@@ -29,8 +29,7 @@ public class life {
 			input.toLowerCase();
 
 			if(input.contains("y")) {
-				System.out.println();
-				//placeCells(field, x, y, keyin);
+				placeCells(field, x, y, keyin);
 			}
 
 			//update and print board
@@ -40,9 +39,29 @@ public class life {
 		}
 	}
 
+	//
 	private static int[] getDots(Scanner keyin){
 		int [] retVal = {0,0};
+		String temp;
 
+
+		while(true){
+			System.out.print("\nX value: ");
+			temp = keyin.nextLine();
+			if(isNumeric(temp)){
+				retVal[0] = Integer.parseInt(temp);
+				break;
+			}
+		}
+
+		while(true){
+			System.out.print("\ny value: ");
+			temp = keyin.nextLine();
+			if(isNumeric(temp)){
+				retVal[1] = Integer.parseInt(temp);
+				break;
+			}
+		}
 
 		return retVal;
 	}
