@@ -26,7 +26,7 @@ public class life {
 		while(true) {
 			System.out.println("Input cell placement? (y/n): ");
 			String input = keyin.nextLine();
-			input.toLowerCase();
+			input = input.toLowerCase();
 
 			if(input.contains("y")) {
 				placeCells(field, x, y, keyin);
@@ -39,8 +39,8 @@ public class life {
 		}
 	}
 
-	//
-	private static int[] getDots(Scanner keyin){
+	//Gets the value for updating an individual dot
+	private static int[] getDot(Scanner keyin){
 		int [] retVal = {0,0};
 
 		for (int ii = 0; ii < 2; ii++) {
@@ -102,8 +102,9 @@ public class life {
 			return false;
 		}
 
+		//this checks if the input is only numbers
 		for (int ii = 0; ii < checkString.length(); ii++) {
-			if (checkString.charAt(ii) < '0' || checkString.charAt(ii) > '9') { //this checks if the input is only numbers
+			if (checkString.charAt(ii) < '0' || checkString.charAt(ii) > '9') {
 				return false;
 			}
 		}
@@ -115,8 +116,7 @@ public class life {
 
 		while(true){
 			System.out.print("(D)ot, (L)ine, (F)ill, (P)rint field, (E)xit");
-			String input = keyin.nextLine();
-			input.toLowerCase();
+			String input = keyin.nextLine().toLowerCase();
 
 			if(input.contains("e")){
 				break;
@@ -127,7 +127,7 @@ public class life {
 			}
 
 			else if(input.contains("d")){
-				int [] temp = getDots(keyin);
+				int [] temp = getDot(keyin);
 				f[temp[0]][temp[1]] = !f[temp[0]][temp[1]];
 			}
 
@@ -181,6 +181,9 @@ public class life {
 				}
 				else if(temp[ii][jj] && (count == 2 || count == 3)){
 					f[ii][jj] = true;
+				}
+				else{
+					f[ii][jj] = false;
 				}
 			}
 		}
