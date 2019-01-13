@@ -1,9 +1,11 @@
 import java.util.Scanner;
 import java.util.Random;
 
+import static java.lang.Thread.sleep;
+
 public class life {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		Scanner keyin = new Scanner(System.in);
 
 		//Get x value
@@ -226,8 +228,9 @@ public class life {
 
 
 	//Runs for sme number of generations without asking
-	private static void runGenerations(boolean[][] f, int x, int y, Scanner keyin){
+	private static void runGenerations(boolean[][] f, int x, int y, Scanner keyin) throws InterruptedException {
 		int gens;
+		int delay;
 
 		while(true){
 			System.out.println("How many generations?");
@@ -239,7 +242,18 @@ public class life {
 			}
 		}
 
+		while(true){
+			System.out.println("How long of a delay between the generations in milliseconds?");
+			String temp = keyin.nextLine();
+
+			if(isNumeric(temp)){
+				delay = Integer.parseInt(temp);
+				break;
+			}
+		}
+
 		for(int ii = 0; ii < gens; ii++){
+			sleep(delay);
 			updateBoard(f, x, y);
 			printBoard(f, x, y);
 		}
