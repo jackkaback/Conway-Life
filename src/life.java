@@ -21,12 +21,19 @@ public class life {
 
 		printBoard(field, x, y);
 		System.out.println("------------------------------------------------------");
-		//getData(field, x, y, keyin);
 
 		while(true) {
-			System.out.println("Input cell placement? (y/n): ");
+			System.out.println("Input cell placement? (y/n) Run for generations? (r) Quit (q): ");
 			String input = keyin.nextLine();
 			input = input.toLowerCase();
+
+			if(input.contains("q")){
+				break;
+			}
+
+			if(input.contains("r")){
+				runGenerations(field, x, y, keyin);
+			}
 
 			if(input.contains("y")) {
 				placeCells(field, x, y, keyin);
@@ -64,6 +71,69 @@ public class life {
 		return retVal;
 	}
 
+	private static void getFill(boolean[][] f, int x, int y, Scanner keyin){
+		int x1, x2, y1, y2;
+
+		while(true){
+			System.out.println("First X value");
+			String temp = keyin.nextLine();
+
+			if (isNumeric(temp)){
+				x1 = Integer.parseInt(temp);
+
+				if(x1 < x){
+					break;
+				}
+			}
+		}
+
+		while(true){
+			System.out.println("First Y value");
+			String temp = keyin.nextLine();
+
+			if (isNumeric(temp)){
+				y1 = Integer.parseInt(temp);
+
+				if(y1 < y){
+					break;
+				}
+			}
+		}
+
+		while(true){
+			System.out.println("Second X value");
+			String temp = keyin.nextLine();
+
+			if (isNumeric(temp)){
+				x2 = Integer.parseInt(temp);
+
+				if(x2 < x){
+					break;
+				}
+			}
+		}
+
+		while(true){
+			System.out.println("Second y value");
+			String temp = keyin.nextLine();
+
+			if (isNumeric(temp)){
+				y2 = Integer.parseInt(temp);
+
+				if(y2 < y){
+					break;
+				}
+			}
+		}
+
+		for(int ii = x1; ii < x2; ii++){
+			for(int jj = y1; jj < y2; jj++){
+				f[ii][jj] = !f[ii][jj];
+			}
+		}
+
+	}
+
 	//gets the value for the X or Y lengths for the array
 	private static int getval(String name, Scanner keyin){
 
@@ -85,7 +155,9 @@ public class life {
 		for(int ii = 0; ii < xVal; ii++){
 			for(int jj = 0; jj < yVal; jj++){
 
-				f[ii][jj] = rand.nextBoolean();
+				f[ii][jj] = false;
+
+//				f[ii][jj] = rand.nextBoolean();
 //				if(ii == 0 || ii == xVal-1 || jj == 0 || jj == yVal-1){
 //					f[ii][jj] = true;
 //				}
@@ -111,11 +183,10 @@ public class life {
 		return true;
 	}
 
-	//TODO add this feature in
 	private static void placeCells(boolean[][] f, int x, int y, Scanner keyin){
 
 		while(true){
-			System.out.print("(D)ot, (L)ine, (F)ill, (P)rint field, (E)xit");
+			System.out.print("(D)ot, (F)ill, (P)rint field, (E)xit");
 			String input = keyin.nextLine().toLowerCase();
 
 			if(input.contains("e")){
@@ -129,6 +200,10 @@ public class life {
 			else if(input.contains("d")){
 				int [] temp = getDot(keyin);
 				f[temp[0]][temp[1]] = !f[temp[0]][temp[1]];
+			}
+
+			else if(input.contains("f")){
+				getFill(f, x, y, keyin);
 			}
 
 		}
