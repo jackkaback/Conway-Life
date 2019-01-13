@@ -149,6 +149,27 @@ public class life {
 		}
 	}
 
+
+	//Runs for sme number of generations without asking
+	private static void runGenerations(boolean[][] f, int x, int y, Scanner keyin){
+		int gens;
+
+		while(true){
+			System.out.println("How many generations?");
+			String temp = keyin.nextLine();
+
+			if(isNumeric(temp)){
+				gens = Integer.parseInt(temp);
+				break;
+			}
+		}
+
+		for(int ii = 0; ii < gens; ii++){
+			updateBoard(f, x, y);
+			printBoard(f, x, y);
+		}
+	}
+
 	//determines what cells are alive or dead after every generation
 	private static void updateBoard(boolean[][] f, int x, int y){
 		boolean temp[][] = f;
