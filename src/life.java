@@ -261,7 +261,12 @@ public class life {
 
 	//determines what cells are alive or dead after every generation
 	private static void updateBoard(boolean[][] f, int x, int y){
-		boolean temp[][] = f;
+
+		//copy the array
+		boolean[][] temp = new boolean[x][y];
+		for(int i = 0; i < x; i++){
+			if (y >= 0) System.arraycopy(f[i], 0, temp[i], 0, y);
+		}
 
 		for (int ii = 1; ii < x - 1; ii++){
 			for (int jj = 1; jj < y - 1; jj++){
