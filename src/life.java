@@ -158,14 +158,6 @@ public class life {
 			for(int jj = 0; jj < yVal; jj++){
 
 				f[ii][jj] = false;
-
-//				f[ii][jj] = rand.nextBoolean();
-//				if(ii == 0 || ii == xVal-1 || jj == 0 || jj == yVal-1){
-//					f[ii][jj] = true;
-//				}
-//				else{
-//					f[ii][jj] = false;
-//				}
 			}
 		}
 	}
